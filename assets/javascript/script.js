@@ -69,13 +69,24 @@ function checkAnswer(event) {
 
     console.log(responseText);  
     if (responseText === questions[index].answer) {
-        answersEl.textContent = "Correct!";
+        // answersEl.textContent = "Correct!";
         console.log("correct");
+        
+        function fadeOut() {
+            answersEl.textContent = "Correct!";
+        }
+        setTimeout(fadeOut);
+        
     }
     else {
-        answersEl.textContent = "Incorrect!";
+        // answersEl.textContent = "Incorrect!";
         timer = (timer - 5);
         console.log("incorrect");
+
+        function fadeOut() {
+            answersEl.textContent = "Incorrect!";
+        }
+        setTimeout(fadeOut);
     }
 
     index++;
