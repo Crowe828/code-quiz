@@ -7,6 +7,9 @@
 // Create hooks
 // Create elements
 // Add a "show question" function
+// Come up with actual questions
+// Add sounds
+// Add penalization for wrong answers
 
 console.log(questions);
 
