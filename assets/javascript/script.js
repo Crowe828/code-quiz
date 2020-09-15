@@ -1,21 +1,13 @@
-// Get initial page set up
-// Get question after question to appear on screen
-// Be able to answer each question
-// Create container
-// Create div within
-// Create div within that holds timer
-// Create hooks
-// Create elements
-// Add a "show question" function
-// Come up with actual questions
-// Add sounds
-// Add penalization for wrong answers
+// The timer ends when all questions have been answered or the timer reaches 0.
+// After the game ends, the user can save their initials and score to a highscores view using local storage.
+// Repository contains quality README with description, screenshot, link to deployed application.
 
 console.log(questions);
 
 var displayQuestionEl = document.querySelector(".display-questions");
 var timerEl = document.querySelector(".timer");
 var resultsEl = document.querySelector(".results");
+var answersEl = document.querySelector(".answers");
 
 var mainDisplay = document.createElement("h3");
 var startBtn = document.createElement("button");
@@ -67,8 +59,8 @@ function nextQuestion() {
         choiceBtn.addEventListener("click", checkAnswer);
 
         choicesContainer.append(choiceBtn);
-        
     }
+
     displayQuestionEl.append(choicesContainer)
 }
 
@@ -77,15 +69,20 @@ function checkAnswer(event) {
 
     console.log(responseText);  
     if (responseText === questions[index].answer) {
+        answersEl.textContent = "Correct!";
         console.log("correct");
     }
     else {
+        answersEl.textContent = "Incorrect!";
+        timer = (timer - 5);
         console.log("incorrect");
     }
 
     index++;
     nextQuestion();
 }
+
+
 
 startBtn.addEventListener("click", startQuiz);
 openingPage();
