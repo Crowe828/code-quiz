@@ -1,19 +1,18 @@
-// The timer ends when all questions have been answered or the timer reaches 0.
-// After the game ends, the user can save their initials and score to a highscores view using local storage.
-// Repository contains quality README with description, screenshot, link to deployed application.
-
+// JavaScript for Code Quiz
 console.log(questions);
 
 var displayQuestionEl = document.querySelector(".display-questions");
 var timerEl = document.querySelector(".timer");
 var resultsEl = document.querySelector(".results");
-var answersEl = document.querySelector(".answers");
 
 var mainDisplay = document.createElement("h3");
 var startBtn = document.createElement("button");
+var submitBtn = document.createElement("button");
+var initialsBox = document.createElement("input");
 
-var timer = 60;
+var timer = 75;
 var index = 0;
+var questionTimer;
 
 function openingPage() {
     mainDisplay.textContent = "Press the button to start";
@@ -27,22 +26,28 @@ function startQuiz() {
 }
 
 function showTimer() {
-    timerEl.textContent = timer;
+    timerEl.textContent = ("Time Remaining: " + timer);
 
-    var questionTimer = setInterval(function(){
+    questionTimer = setInterval(function(){
+
+        if (timer < 0) {
+            timer = 0;
+        }
 
         timer--
-        timerEl.textContent = timer;
+        timerEl.textContent = ("Time Remaining: " + timer);
 
-        if (timer <= 0) {
+        if (timer <= 0  || index >= questions.length) {
             clearInterval(questionTimer);
+            scoreBoard();
         }
-    }, 1 * 1000);
+
+    }, 1000);
 
 }
 
 function nextQuestion() {
-    var currentQuestion = questions[index];
+   var currentQuestion = questions[index];
 
     console.log(currentQuestion);
 
@@ -66,34 +71,38 @@ function nextQuestion() {
 
 function checkAnswer(event) {
     var responseText = event.target.textContent;
+    console.log(responseText);
 
-    console.log(responseText);  
     if (responseText === questions[index].answer) {
-        // answersEl.textContent = "Correct!";
+        resultsEl.textContent = "Correct!";
         console.log("correct");
-        
-        function fadeOut() {
-            answersEl.textContent = "Correct!";
-        }
-        setTimeout(fadeOut);
-        
+        resultsEl;
     }
     else {
-        // answersEl.textContent = "Incorrect!";
+        resultsEl.textContent = "Incorrect!";
         timer = (timer - 5);
         console.log("incorrect");
-
-        function fadeOut() {
-            answersEl.textContent = "Incorrect!";
-        }
-        setTimeout(fadeOut);
+        resultsEl;
     }
 
     index++;
     nextQuestion();
 }
 
+// Once timer runs out, display the user's final score
+function scoreBoard() {
+    mainDisplay.textContent = "Great job!";
+    timerEl.textContent = ("Your final score is: " + timer);
+    resultsEl.textContent = "Please enter your initials to save your high score: ";
 
+    // Have a text field where they can save their initials
+    initialsBox.textContent = "Initials";
+    submitBtn.textContent = "Submit";
+
+    // Use localStorage to save the users score and initials
+
+    displayQuestionEl.append(mainDisplay, timerEl, resultsEl, initialsBox, submitBtn);
+}
 
 startBtn.addEventListener("click", startQuiz);
 openingPage();
