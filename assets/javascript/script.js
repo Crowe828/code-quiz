@@ -9,10 +9,13 @@ var mainDisplay = document.createElement("h3");
 var startBtn = document.createElement("button");
 var submitBtn = document.createElement("button");
 var initialsBox = document.createElement("input");
+var submitScore = document.createElement("form");
 
 var timer = 75;
-var index = 0;
 var questionTimer;
+var index = 0;
+var highScores = [];
+
 
 function openingPage() {
     mainDisplay.textContent = "Press the button to start";
@@ -98,10 +101,12 @@ function scoreBoard() {
     // Have a text field where they can save their initials
     initialsBox.textContent = "Initials";
     submitBtn.textContent = "Submit";
+    
 
     // Use localStorage to save the users score and initials
 
-    displayQuestionEl.append(mainDisplay, timerEl, resultsEl, initialsBox, submitBtn);
+    submitScore.append(initialsBox, submitBtn);
+    displayQuestionEl.append(mainDisplay, timerEl, resultsEl, submitScore);
 }
 
 startBtn.addEventListener("click", startQuiz);
