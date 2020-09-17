@@ -21,8 +21,8 @@ var startBtn = document.createElement("button");
 startBtn.style.backgroundColor = "#90ee90";
 startBtn.style.padding = "5px";
 startBtn.style.borderRadius = "8px";
-// Global empty variable to display scoreboard on screen
-var scoreboard = document.createElement("h3");
+// List to display scoreboard on screen
+var highScoreList = document.createElement("ol");
 
 
 // Counts down from 75 seconds. 5 seconds are deducted for every incorrect answer
@@ -249,8 +249,6 @@ function userScore() {
         localStorage.setItem("scores", JSON.stringify(highScores));
 
         leaderboard();
-
-        
     }   
 }
 
@@ -258,16 +256,24 @@ function leaderboard() {
 
     displayQuestionEl.textContent = "";
 
+    mainDisplay.textContent = "Scoreboard";
+
     // Retrieve scores from localStorage and display it on the screen
     highScores = JSON.parse(localStorage.getItem("scores"));
-    // scoreboard = highScores.value;
-
-
-    mainDisplay.textContent = "Scoreboard";
-    scoreboard.textContent = highScores;
+    console.log(highScores);
     
+    // Display each value within the highSchores array as a list
+    for (var i = 0; i < highScores.length; i++) {
+        var scoreboard = highScores[i];
 
-    displayQuestionEl.append(mainDisplay, scoreboard);
+        var li = document.createElement("li");
+        li.textContent = (scoreboard.points);
+        li.setAttribute("data-index", i);
+        highScoreList.appendChild(li);
+    }
+    
+    // Append everything to the page
+    displayQuestionEl.append(mainDisplay, highScoreList);
 }
 
 
