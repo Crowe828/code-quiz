@@ -4,11 +4,10 @@
 // Log to make sure the application opened correctly
 console.log(questions.length + " questions, good to go.");
 
-
-// Displays each question
-var displayQuestionEl = document.querySelector(".display-questions");
 // Timer starts at 75 seconds, starts counting down as soon as the user presses start
 var timerEl = document.querySelector(".timer");
+// Displays each question
+var displayQuestionEl = document.querySelector(".display-questions");
 // Displays whether the answer to each question was correct or incorrect
 var answersEl = document.querySelector(".answers");
 // Final score at the end of the quiz
@@ -29,6 +28,8 @@ var index = 0;
 var questionTimer;
 // Global empty variable for the users score
 var score;
+// Global empty variable for the users initials
+var initials;
 // Empty array which will hold the users score and initials
 var highScores = [];
 
@@ -115,7 +116,7 @@ function nextQuestion() {
     }
 
     // Appends all of this to the screen
-    displayQuestionEl.append(choicesContainer)
+    displayQuestionEl.append(choicesContainer);
 }
 
 // Checks whether each answer is correct or not
@@ -147,22 +148,39 @@ function checkAnswer(event) {
 }
 
 // Once timer runs out, display the user's final score
-function userScore(event) {
+function userScore() {
     // Explains how to save their score 
     var submitExplain = document.createElement("p");
+
+    // Form to submit initials to localStorage
+    var submitForm = document.createElement("form");
+    submitForm.setAttribute("id", "input-form");
+
+    // Label for form
+    var submitLabel = document.createElement("label");
+    submitLabel.textContent = "Initials: ";
+
     // Text box where you enter your initials
-    var initialsBox = document.createElement("input");
+    var inputBox = document.createElement("input");
+    inputBox.setAttribute("type", "text");
+    inputBox.setAttribute("name", "initials");
+
     // Button to submit your initials and score
-    var submitBtn = document.createElement("button");
-    // Takes the submit button and initials box and turns them into one form
-    var submitScore = document.createElement("form");
+    var inputBtn = document.createElement("input");
+    inputBtn.setAttribute("type", "submit");
     
+
+    // Append the label, input, and button field to a form
+    submitForm.append(submitLabel, inputBox, inputBtn);
 
     // When the timer stops, that is the user's score
     score = timer;
     console.log(score);
+    // Push their score into the highScores array
+    // highScores.push(score);
     
-
+    // Wipes previous text and start fresh
+    displayQuestionEl.textContent = "";
     // Hides timer
     timerEl.style.display = "none";
     // Hides correct/incorrect
@@ -176,38 +194,36 @@ function userScore(event) {
     // Instructs user to enter their initials to save their score
     submitExplain.textContent = "Please enter your initials to save your score.";
 
-
-    // Text field where they can save their initials and a button to submit
-    initialsBox;
-    submitBtn.textContent = "Submit";
-
-    // Pushes users score into the highScores array
-    highScores.push(score);
-
-    // Appended the button and input field to a form
-    submitScore.append(initialsBox, submitBtn);
-
-    // When submit is clicked, send user to the scoreboard
-    submitBtn.addEventListener("click", scoreboard);
-
     // Append the final score and form to displayQuestionEl
-    displayQuestionEl.append(timerEl, mainDisplay, scoreEl, submitExplain, submitScore);
+    displayQuestionEl.append(timerEl, mainDisplay, scoreEl, submitExplain, submitForm);
 
+    // When the user clicks submit, store their initials and score in localStorage
+    submitForm.onsubmit = function (event) {
+        event.preventDefault();
+
+        // Check if there's anything in localStorage already
+        // stores the info in localStorage
+        var storedScores = JSON.parse(localStorage.getItem("highScores"));
+        // If scores have already been stored
+        if (storedScores !== null) {
+            // Give storedInfo everything stored in the highScores array
+            highScores = storedScores;
+        }
+        // Stores initials and score 
+        var highScoresObj = {
+            name: submitForm.initials.value,
+            points: score
+        }
+        // Push highScoresObj into highScores array
+        highScores.push(highScoresObj);
+        
+        console.log(highScoresObj.name);
+
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    }
+
+    // storedScores = JSON.parse(localStorage.getItem("highScores"));
 }
-
-function scoreboard() {
-    displayQuestionEl.textContent = "High scores";
-    console.log(highScores);
-}
-
-// create form, click event, value from the form
-// var testArr = JSON.parse(localStorage.getItem("highScoresLocal"));
-// localStorage.setItem("highScoresLocal", JSON.stringify(highScores));
-// var testArr = JSON.parse(localStorage.getItem("highScoresLocal"));
-// Use testArr to display on the page
-
-
-
 
 startBtn.addEventListener("click", startQuiz);
 openingPage();
