@@ -18,9 +18,14 @@ var scoreEl = document.querySelector(".score");
 var mainDisplay = document.createElement("h3");
 // Button to start the quiz
 var startBtn = document.createElement("button");
+startBtn.style.backgroundColor = "#90ee90";
+startBtn.style.padding = "5px";
+startBtn.style.borderRadius = "8px";
+// Global empty variable to display scoreboard on screen
+var scoreboard = document.createElement("h3");
 
 
-// Counts down for 75 seconds. 5 seconds are deducted for every incorrect answer
+// Counts down from 75 seconds. 5 seconds are deducted for every incorrect answer
 var timer = 75;
 // Will be used to index the questions array in the questions.js file
 var index = 0;
@@ -28,10 +33,9 @@ var index = 0;
 var questionTimer;
 // Global empty variable for the users score
 var score;
-// Global empty variable for the users initials
-var initials;
 // Empty array which will hold the users score and initials
 var highScores = [];
+
 
 
 // First page that you see upon starting the quiz
@@ -104,6 +108,20 @@ function nextQuestion() {
 
         // Creates a button for each answer
         var choiceBtn = document.createElement("button");
+        choiceBtn.style.backgroundColor = "#90ee90";
+        choiceBtn.style.borderRadius = "8px";
+        choiceBtn.style.backgroundColor = "#90ee90";
+        choiceBtn.style.padding = "5px";
+        choiceBtn.style.margin = "5px";
+        
+
+
+//     padding: 15px 32px;
+//     text - align: center;
+//     text - decoration: none;
+//     display: inline - block;
+//     font - size: 20px;
+// }
 
         // Adds each answer choice to a button
         choiceBtn.textContent = currentQuestion.choices[i];
@@ -149,6 +167,7 @@ function checkAnswer(event) {
 
 // Once timer runs out, display the user's final score
 function userScore() {
+
     // Explains how to save their score 
     var submitExplain = document.createElement("p");
 
@@ -168,17 +187,21 @@ function userScore() {
     // Button to submit your initials and score
     var inputBtn = document.createElement("input");
     inputBtn.setAttribute("type", "submit");
+    inputBtn.style.backgroundColor = "#90ee90";
+    inputBtn.style.borderRadius = "4px";
+    inputBtn.style.backgroundColor = "#90ee90";
+    inputBtn.style.padding = "5px";
+    inputBtn.style.margin = "5px";
     
-
     // Append the label, input, and button field to a form
     submitForm.append(submitLabel, inputBox, inputBtn);
+
 
     // When the timer stops, that is the user's score
     score = timer;
     console.log(score);
-    // Push their score into the highScores array
-    // highScores.push(score);
-    
+
+
     // Wipes previous text and start fresh
     displayQuestionEl.textContent = "";
     // Hides timer
@@ -194,36 +217,62 @@ function userScore() {
     // Instructs user to enter their initials to save their score
     submitExplain.textContent = "Please enter your initials to save your score.";
 
+
     // Append the final score and form to displayQuestionEl
     displayQuestionEl.append(timerEl, mainDisplay, scoreEl, submitExplain, submitForm);
+
 
     // When the user clicks submit, store their initials and score in localStorage
     submitForm.onsubmit = function (event) {
         event.preventDefault();
 
+
         // Check if there's anything in localStorage already
-        // stores the info in localStorage
-        var storedScores = JSON.parse(localStorage.getItem("highScores"));
+        var storedScores = JSON.parse(localStorage.getItem("scores"));
         // If scores have already been stored
         if (storedScores !== null) {
             // Give storedInfo everything stored in the highScores array
             highScores = storedScores;
         }
+
         // Stores initials and score 
         var highScoresObj = {
             name: submitForm.initials.value,
             points: score
         }
+
         // Push highScoresObj into highScores array
         highScores.push(highScoresObj);
+        console.log(highScoresObj);
+
+        // Turn the user's score into a string and save it to localStorage
+        localStorage.setItem("scores", JSON.stringify(highScores));
+
+        leaderboard();
+
         
-        console.log(highScoresObj.name);
-
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-    }
-
-    // storedScores = JSON.parse(localStorage.getItem("highScores"));
+    }   
 }
 
+function leaderboard() {
+
+    displayQuestionEl.textContent = "";
+
+    // Retrieve scores from localStorage and display it on the screen
+    highScores = JSON.parse(localStorage.getItem("scores"));
+    // scoreboard = highScores.value;
+
+
+    mainDisplay.textContent = "Scoreboard";
+    scoreboard.textContent = highScores;
+    
+
+    displayQuestionEl.append(mainDisplay, scoreboard);
+}
+
+
+
+
+// When the start button is clicked, the quiz starts
 startBtn.addEventListener("click", startQuiz);
 openingPage();

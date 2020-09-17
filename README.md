@@ -1,110 +1,22 @@
 # Code Quiz
 
-This is application is intended to ask a user a series of questions focused on assessing their coding capabilities. This application is built with HTML, CSS, and JavaScript.
+This is application is intended to ask a user a series of questions focused on assessing their coding capabilities. There is a timer that starts at 75 seconds, and goes down until the user finishes the quiz or the timer reaches zero. If they get a question wrong, they will be deducted five seconds. After the quiz has finished they will be prompted to enter their initials and save their final score. This application is built with HTML, CSS, and JavaScript.
 
-# 04 Web APIs: Code Quiz
+## Deployment
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+* Application: https://crowe828.github.io/code-quiz/
+* GitHub Repo: https://github.com/Crowe828/code-quiz
 
-## User Story
+## Built With
 
-```
-AS A coding bootcamp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+* HTML5
+* CSS3
+* JavaScript
 
-## Acceptance Criteria
+## Authors
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
-```
+* **Christian Rowe** - *Sole Contributor* - [GitHub](https://github.com/Crowe828)
 
-## Mock-Up
+## Acknowledgments
 
-The following image shows the web application's appearance and functionality:
-
-![code quiz](./assets/04-web-apis-homework-demo.gif)
-
-<br>
-
-## Grading Requirements
-
-This homework is graded based on the following criteria: 
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria plus the following:
-
-  * The homework should not produce any errors in the console when you inspect it using Chrome DevTools.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality README file with description, screenshot, and link to deployed application.
-
-<br>
-
-## You should set your questions as an object like this example:
-
-```js
-var questions = [
-  {
-    title: "Example Question 1:",
-    choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-    answer: "answer from choices"
-  },
-  {
-    title: "Example Question 2:",
-    choices: ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
-    answer: "answer from choices"
-  }
-];
-```
-
-## Check list
-```
-✓✓ The first view of the application displays a button used to start the quiz.
-✓✓ Clicking the 'Start Quiz' button displays a series of questions.
-✓✓ Once the quiz begins, a countdown timer starts.
-
-✓ If a question is answered incorrectly, additional time is subtracted from the timer.
-✓ The timer ends when all questions have been answered or the timer reaches 0.
-✓ After the game ends, the user can save their initials and score to a highscores view using local storage.
-✓ Repository contains quality README with description, screenshot, link to deployed application.
-```
+* This project was completed thanks to my instructor, John Wayne Dinsmore, his TA Jorge Alvarez, as well as the help from all of my fellow classmates.
