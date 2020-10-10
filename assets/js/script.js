@@ -1,8 +1,3 @@
-// JavaScript for Code Quiz
-
-// Log to make sure the application opened correctly
-console.log(questions.length + " questions, good to go.");
-
 // Timer starts at 75 seconds, starts counting down as soon as the user presses start
 var timerEl = document.querySelector(".timer");
 // Displays each question
@@ -187,7 +182,6 @@ function userScore() {
 
   // When the timer stops, that is the user's score
   score = timer;
-  console.log(score);
 
   // Wipes previous text and start fresh
   displayQuestionEl.textContent = "";
@@ -217,7 +211,7 @@ function userScore() {
     event.preventDefault();
 
     // Check if there's anything in localStorage already
-    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedScores = JSON.parse(localStorage.getItem("scores")) || [];
     // If scores have already been stored
     if (storedScores !== null) {
       // Give storedInfo everything stored in the highScores array
@@ -232,7 +226,6 @@ function userScore() {
 
     // Push highScoresObj into highScores array
     highScores.push(highScoresObj);
-    console.log(highScoresObj);
 
     // Turn the user's score into a string and save it to localStorage
     localStorage.setItem("scores", JSON.stringify(highScores));
@@ -247,15 +240,19 @@ function leaderboard() {
   mainDisplay.textContent = "Scoreboard";
 
   // Retrieve scores from localStorage and display it on the screen
-  highScores = JSON.parse(localStorage.getItem("scores"));
+  highScores = JSON.parse(localStorage.getItem("scores")) || [];
   console.log(highScores);
+
+  highScores.sort(function (a, b) {
+    return b.points - a.points;
+  });
 
   // Display each value within the highSchores array as a list
   for (var i = 0; i < highScores.length; i++) {
     var scoreboard = highScores[i];
 
     var li = document.createElement("li");
-    li.textContent = scoreboard.points;
+    li.textContent = scoreboard.name + " - " + scoreboard.points;
     li.setAttribute("data-index", i);
     highScoreList.appendChild(li);
   }
