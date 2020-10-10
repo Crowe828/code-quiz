@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Quiz!</title>
 
     <!-- Reset -->
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css" />
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container" style="text-align: center">
-        <!-- How much time the user has left to finish the quiz -->
-        <div class="timer"></div>
-        
-        <!-- Displays questions. Quiz is 10 questions long. -->
-        <div class="display-questions">
-            <h1>Code Quiz!</h1>
-            
-        </div>
+      <!-- High Scores page -->
+      <div class="scores"><a href="highscores.html">View Highscores</a></div>
+      <!-- How much time the user has left to finish the quiz -->
+      <div class="timer">Time: <span id="time">0</span></div>
 
-        <!-- Displays whether the users answer was correct or incorrect -->
-        <div class="answers"></div>
+      <!-- Displays questions. Quiz is 10 questions long. -->
+      <div class="display-questions">
+        <h1>Code Quiz!</h1>
+      </div>
 
-        <!-- Users score at the end of the quiz -->
-        <div class="score"></div>
+      <!-- Displays whether the users answer was correct or incorrect -->
+      <div class="answers"></div>
 
+      <!-- Users score at the end of the quiz -->
+      <div class="score"></div>
     </div>
 
     <!-- Quiz questions -->
-    <script src="assets/javascript/questions.js"></script>
-
-    <!-- JavaScript -->
-    <script src="assets/javascript/script.js"></script>
-</body>
-</html>   
+    <script src="assets/js/questions.js"></script>
+    <!-- Logic -->
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
