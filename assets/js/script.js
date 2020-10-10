@@ -14,8 +14,6 @@ var startBtn = document.createElement("button");
 startBtn.style.backgroundColor = "#90ee90";
 startBtn.style.padding = "5px";
 startBtn.style.borderRadius = "8px";
-// List to display scoreboard on screen
-var highScoreList = document.createElement("ol");
 
 // Counts down from 75 seconds. 5 seconds are deducted for every incorrect answer
 var timer = 75;
@@ -27,6 +25,10 @@ var questionTimer;
 var score;
 // Empty array which will hold the users score and initials
 var highScores = [];
+
+// sound effects
+var sfxRight = new Audio("assets/sfx/correct.wav");
+var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 
 // First page that you see upon starting the quiz
 function openingPage() {
@@ -132,17 +134,19 @@ function checkAnswer(event) {
   // If their answer is correct, let them know
   if (responseText === questions[index].answer) {
     answersEl.textContent = "Correct!";
-    // Log it
-    console.log("correct");
     answersEl;
+
+    // play "right" sound effect
+    sfxRight.play();
   }
   // If their answer is incorrect, let them know and subtract five seconds
   else {
     answersEl.textContent = "Incorrect!";
     timer = timer - 5;
-    // Log it
-    console.log("incorrect");
     answersEl;
+
+    // play "wrong" sound effect
+    sfxWrong.play();
   }
 
   // Cycles through each question and displays the next question
@@ -246,6 +250,9 @@ function leaderboard() {
   highScores.sort(function (a, b) {
     return b.points - a.points;
   });
+
+  // List to display scoreboard on screen
+  var highScoreList = document.createElement("ol");
 
   // Display each value within the highSchores array as a list
   for (var i = 0; i < highScores.length; i++) {
